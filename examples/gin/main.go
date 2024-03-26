@@ -1,30 +1,30 @@
 package main
 
 import (
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"os/signal"
 	"time"
 
-	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mysql"
-	_ "github.com/GoAdminGroup/themes/sword"
+	_ "github.com/plumk97/go-admin/adapter/gin"
+	_ "github.com/plumk97/go-admin/modules/db/drivers/mysql"
+	_ "github.com/plumk97/themes/sword"
 
-	"github.com/GoAdminGroup/go-admin/engine"
-	"github.com/GoAdminGroup/go-admin/examples/datamodel"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/language"
-	"github.com/GoAdminGroup/go-admin/plugins/example"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/chartjs"
-	"github.com/GoAdminGroup/themes/adminlte"
 	"github.com/gin-gonic/gin"
+	"github.com/plumk97/go-admin/engine"
+	"github.com/plumk97/go-admin/examples/datamodel"
+	"github.com/plumk97/go-admin/modules/config"
+	"github.com/plumk97/go-admin/modules/language"
+	"github.com/plumk97/go-admin/plugins/example"
+	"github.com/plumk97/go-admin/template"
+	"github.com/plumk97/go-admin/template/chartjs"
+	"github.com/plumk97/themes/adminlte"
 )
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)
-	gin.DefaultWriter = ioutil.Discard
+	gin.DefaultWriter = io.Discard
 
 	r := gin.New()
 

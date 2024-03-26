@@ -14,10 +14,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/system"
-	"github.com/GoAdminGroup/go-admin/modules/utils"
+	"github.com/plumk97/go-admin/modules/config"
+	"github.com/plumk97/go-admin/modules/db"
+	"github.com/plumk97/go-admin/modules/system"
+	"github.com/plumk97/go-admin/modules/utils"
 )
 
 func buildProjectWeb(port string) {

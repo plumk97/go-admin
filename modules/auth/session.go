@@ -10,12 +10,12 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
+	"github.com/plumk97/go-admin/context"
+	"github.com/plumk97/go-admin/modules/config"
+	"github.com/plumk97/go-admin/modules/db"
+	"github.com/plumk97/go-admin/modules/db/dialect"
+	"github.com/plumk97/go-admin/modules/logger"
+	"github.com/plumk97/go-admin/plugins/admin/modules"
 )
 
 const DefaultCookieKey = "go_admin_session"

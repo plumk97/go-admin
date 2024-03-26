@@ -6,17 +6,17 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/auth"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
-	"github.com/GoAdminGroup/go-admin/modules/system"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/captcha"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/response"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/types"
+	"github.com/plumk97/go-admin/context"
+	"github.com/plumk97/go-admin/modules/auth"
+	"github.com/plumk97/go-admin/modules/config"
+	"github.com/plumk97/go-admin/modules/db"
+	"github.com/plumk97/go-admin/modules/logger"
+	"github.com/plumk97/go-admin/modules/system"
+	"github.com/plumk97/go-admin/plugins/admin/models"
+	"github.com/plumk97/go-admin/plugins/admin/modules/captcha"
+	"github.com/plumk97/go-admin/plugins/admin/modules/response"
+	"github.com/plumk97/go-admin/template"
+	"github.com/plumk97/go-admin/template/types"
 )
 
 // Auth check the input password and username for authentication.

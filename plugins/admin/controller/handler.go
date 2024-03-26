@@ -5,17 +5,17 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/auth"
-	"github.com/GoAdminGroup/go-admin/modules/errors"
-	"github.com/GoAdminGroup/go-admin/modules/logger"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/parameter"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/response"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/types"
+	"github.com/plumk97/go-admin/context"
+	"github.com/plumk97/go-admin/modules/auth"
+	"github.com/plumk97/go-admin/modules/errors"
+	"github.com/plumk97/go-admin/modules/logger"
+	"github.com/plumk97/go-admin/plugins/admin/modules/constant"
+	"github.com/plumk97/go-admin/plugins/admin/modules/form"
+	"github.com/plumk97/go-admin/plugins/admin/modules/parameter"
+	"github.com/plumk97/go-admin/plugins/admin/modules/response"
+	"github.com/plumk97/go-admin/plugins/admin/modules/table"
+	"github.com/plumk97/go-admin/template"
+	"github.com/plumk97/go-admin/template/types"
 )
 
 // GlobalDeferHandler is a global error handler of admin plugin.

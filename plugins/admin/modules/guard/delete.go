@@ -1,9 +1,9 @@
 package guard
 
 import (
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/errors"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
+	"github.com/plumk97/go-admin/context"
+	"github.com/plumk97/go-admin/modules/errors"
+	"github.com/plumk97/go-admin/plugins/admin/modules/table"
 )
 
 type DeleteParam struct {

@@ -3,18 +3,18 @@ package example
 import (
 	"html/template"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/auth"
-	"github.com/GoAdminGroup/go-admin/modules/page"
-	template2 "github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/chartjs"
-	"github.com/GoAdminGroup/go-admin/template/types"
-	"github.com/GoAdminGroup/themes/adminlte/components/chart_legend"
-	"github.com/GoAdminGroup/themes/adminlte/components/description"
-	"github.com/GoAdminGroup/themes/adminlte/components/infobox"
-	"github.com/GoAdminGroup/themes/adminlte/components/productlist"
-	"github.com/GoAdminGroup/themes/adminlte/components/progress_group"
-	"github.com/GoAdminGroup/themes/adminlte/components/smallbox"
+	"github.com/plumk97/go-admin/context"
+	"github.com/plumk97/go-admin/modules/auth"
+	"github.com/plumk97/go-admin/modules/page"
+	template2 "github.com/plumk97/go-admin/template"
+	"github.com/plumk97/go-admin/template/chartjs"
+	"github.com/plumk97/go-admin/template/types"
+	"github.com/plumk97/themes/adminlte/components/chart_legend"
+	"github.com/plumk97/themes/adminlte/components/description"
+	"github.com/plumk97/themes/adminlte/components/infobox"
+	"github.com/plumk97/themes/adminlte/components/productlist"
+	"github.com/plumk97/themes/adminlte/components/progress_group"
+	"github.com/plumk97/themes/adminlte/components/smallbox"
 )
 
 func (e *Example) TestHandler(ctx *context.Context) {
