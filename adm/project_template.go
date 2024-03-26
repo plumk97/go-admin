@@ -7,7 +7,7 @@ package main
 import (
 	"context"
 	"errors"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -35,7 +35,7 @@ func main() {
 
 func startServer() {
 	gin.SetMode(gin.ReleaseMode)
-	gin.DefaultWriter = ioutil.Discard
+	gin.DefaultWriter = io.Discard
 
 	r := gin.Default()
 

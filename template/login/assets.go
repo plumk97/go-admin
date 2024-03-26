@@ -10,7 +10,6 @@ import (
 	"compress/gzip"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -83,7 +82,7 @@ func assetsLoginDistAllMinCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/login/dist/all.min.css", size: 187170, mode: os.FileMode(420), modTime: time.Unix(1570965576, 0)}
+	info := bindataFileInfo{name: "assets/login/dist/all.min.css", size: 187170, mode: os.FileMode(0420), modTime: time.Unix(1570965576, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -103,7 +102,7 @@ func assetsLoginDistAllMinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/login/dist/all.min.js", size: 145666, mode: os.FileMode(420), modTime: time.Unix(1571033118, 0)}
+	info := bindataFileInfo{name: "assets/login/dist/all.min.js", size: 145666, mode: os.FileMode(0420), modTime: time.Unix(1571033118, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -123,7 +122,7 @@ func assetsLoginDistRespondMinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "assets/login/dist/respond.min.js", size: 4377, mode: os.FileMode(420), modTime: time.Unix(1570872928, 0)}
+	info := bindataFileInfo{name: "assets/login/dist/respond.min.js", size: 4377, mode: os.FileMode(0420), modTime: time.Unix(1570872928, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -226,12 +225,12 @@ type bintree struct {
 }
 
 var _bintree = &bintree{nil, map[string]*bintree{
-	"assets": &bintree{nil, map[string]*bintree{
-		"login": &bintree{nil, map[string]*bintree{
-			"dist": &bintree{nil, map[string]*bintree{
-				"all.min.css":    &bintree{assetsLoginDistAllMinCss, map[string]*bintree{}},
-				"all.min.js":     &bintree{assetsLoginDistAllMinJs, map[string]*bintree{}},
-				"respond.min.js": &bintree{assetsLoginDistRespondMinJs, map[string]*bintree{}},
+	"assets": {nil, map[string]*bintree{
+		"login": {nil, map[string]*bintree{
+			"dist": {nil, map[string]*bintree{
+				"all.min.css":    {assetsLoginDistAllMinCss, map[string]*bintree{}},
+				"all.min.js":     {assetsLoginDistAllMinJs, map[string]*bintree{}},
+				"respond.min.js": {assetsLoginDistRespondMinJs, map[string]*bintree{}},
 			}},
 		}},
 	}},
@@ -251,7 +250,7 @@ func RestoreAsset(dir, name string) error {
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile(_filePath(dir, name), data, info.Mode())
+	err = os.WriteFile(_filePath(dir, name), data, info.Mode())
 	if err != nil {
 		return err
 	}

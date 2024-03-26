@@ -1,7 +1,7 @@
 package web
 
 import (
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"testing"
@@ -196,7 +196,7 @@ func startServer(quit chan struct{}) {
 
 	if !debugMode {
 		gin.SetMode(gin.ReleaseMode)
-		gin.DefaultWriter = ioutil.Discard
+		gin.DefaultWriter = io.Discard
 	}
 
 	r := gin.New()

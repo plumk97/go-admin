@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"html/template"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strconv"
 	"strings"
@@ -202,7 +202,7 @@ func (tb *DefaultTable) getDataFromURL(params parameter.Parameters) ([]map[strin
 		_ = res.Body.Close()
 	}()
 
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 
 	if err != nil {
 		return []map[string]interface{}{}, 0

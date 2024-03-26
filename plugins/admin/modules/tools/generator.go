@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"go/format"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -268,7 +268,7 @@ func Generate(param *Param) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(filepath.FromSlash(param.Output)+"/"+param.RowTable+".go", c, 0644)
+	return os.WriteFile(filepath.FromSlash(param.Output)+"/"+param.RowTable+".go", c, 0644)
 }
 
 const (
@@ -297,7 +297,7 @@ func GenerateTables(outputPath, packageName string, tables []string, isNew bool)
 		err               error
 	)
 	if fileExist {
-		tablesContentByte, err = ioutil.ReadFile(outputPath + "/tables.go")
+		tablesContentByte, err = os.ReadFile(outputPath + "/tables.go")
 		if err != nil {
 			return err
 		}
@@ -372,7 +372,7 @@ var Generators = map[string]table.Generator{
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(outputPath+"/tables.go", c, 0644)
+	return os.WriteFile(outputPath+"/tables.go", c, 0644)
 }
 
 func InsertPermissionOfTable(conn db.Connection, table string) {

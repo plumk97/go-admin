@@ -2,7 +2,7 @@ package guard
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 
 	"github.com/plumk97/go-admin/context"
 	"github.com/plumk97/go-admin/modules/logger"
@@ -17,7 +17,7 @@ func (g *Guard) ServerLogin(ctx *context.Context) {
 
 	var p ServerLoginParam
 
-	body, err := ioutil.ReadAll(ctx.Request.Body)
+	body, err := io.ReadAll(ctx.Request.Body)
 
 	if err != nil {
 		logger.Error("get server login parameter error: ", err)
