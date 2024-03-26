@@ -43,7 +43,7 @@ func startServer() {
 
 	eng := engine.Default()
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(r); err != nil {
 		panic(err)
@@ -122,7 +122,7 @@ func startServer() {
 
 	beego.SetStaticPath("/uploads", "uploads")
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(app); err != nil {
 		panic(err)
@@ -184,7 +184,7 @@ func startServer() {
 
 	eng := engine.Default()
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(bu); err != nil {
 		panic(err)
@@ -247,7 +247,7 @@ func startServer() {
 
 	eng := engine.Default()
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(r); err != nil {
 		panic(err)
@@ -330,7 +330,7 @@ func startServer() {
 
 	eng := engine.Default()
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(e); err != nil {
 		panic(err)
@@ -389,7 +389,7 @@ func startServer() {
 
 	eng := engine.Default()
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(router); err != nil {
 		panic(err)
@@ -449,7 +449,7 @@ func startServer() {
 
 	eng := engine.Default()
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(s); err != nil {
 		panic(err)
@@ -509,7 +509,7 @@ func startServer() {
 
 	eng := engine.Default()
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(app); err != nil {
 		panic(err)
@@ -569,7 +569,7 @@ func startServer() {
 
 	eng := engine.Default()
 
-	if err := eng.AddConfigFromJSON("./config.json").
+	if err := eng.AddConfigFromYAML("./config.yaml").
 		AddGenerators(tables.Generators).
 		Use(app); err != nil {
 		panic(err)
@@ -1269,10 +1269,10 @@ like Aldus PageMaker including versions of Lorem Ipsum.
 	}, nil
 }`)
 
-var mainTest = []byte(`package main
+var mainTest = `package main
 
 import (
-	"./tables"
+	"{{.Module}}/tables"
 	"github.com/plumk97/go-admin/modules/config"
 	"github.com/plumk97/go-admin/tests"
 	"github.com/plumk97/go-admin/tests/common"
@@ -1285,7 +1285,7 @@ import (
 
 // Black box testing
 func TestMainBlackBox(t *testing.T) {
-	cfg := config.ReadFromJson("./config.json")
+	cfg := config.ReadFromYaml("./config.yaml")
 	tests.BlackBoxTestSuit(t, gin.NewHandler, cfg.Databases, tables.Generators, func(cfg config.DatabaseList) {
 		// Data cleaner of the framework
 		tests.Cleaner(cfg)
@@ -1315,12 +1315,12 @@ func TestMainUserAcceptance(t *testing.T) {
 		<-quit
 		log.Print("test quit")
 	}, true) // if local parameter is true, it will not be headless, and window not close when finishing tests.
-}`)
+}`
 
-var mainTestCN = []byte(`package main
+var mainTestCN = `package main
 
 import (
-	"./tables"
+	"{{.Module}}/tables"
 	"github.com/plumk97/go-admin/modules/config"
 	"github.com/plumk97/go-admin/tests"
 	"github.com/plumk97/go-admin/tests/common"
@@ -1333,7 +1333,7 @@ import (
 
 // 黑盒测试
 func TestMainBlackBox(t *testing.T) {
-	cfg := config.ReadFromJson("./config.json")
+	cfg := config.ReadFromYaml("./config.yaml")
 	tests.BlackBoxTestSuit(t, gin.NewHandler, cfg.Databases, tables.Generators, func(cfg config.DatabaseList) {
 		// 框架自带数据清理
 		tests.Cleaner(cfg)
@@ -1363,7 +1363,7 @@ func TestMainUserAcceptance(t *testing.T) {
 		<-quit
 		log.Print("test quit")
 	}, true)
-}`)
+}`
 
 var makefile = []byte(`GOCMD = go
 GOBUILD = $(GOCMD) build
@@ -1451,7 +1451,7 @@ GoAdmin is a golang framework help gopher quickly build a data visualization pla
 ├── adm.ini             adm config
 ├── admin.db            sqlite database
 ├── build               binary build target folder
-├── config.json         config file
+├── config.yaml         config file
 ├── go.mod              go.mod
 ├── go.sum              go.sum
 ├── html                frontend html files
@@ -1494,7 +1494,7 @@ GoAdmin 是一个帮你快速搭建数据可视化管理应用平台的框架。
 ├── adm.ini             adm配置文件
 ├── admin.db            sqlite数据库
 ├── build               二进制构建目标文件夹
-├── config.json         配置文件
+├── config.yaml         配置文件
 ├── go.mod              go.mod
 ├── go.sum              go.sum
 ├── html                前端html文件

@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"go/format"
@@ -260,6 +259,8 @@ func installProjectTmpl(p Project, cfg *config.Config, cfgFile string, info *dbI
 
 import (
 	"github.com/plumk97/go-admin/modules/db"
+
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
@@ -270,11 +271,11 @@ var (
 
 func Init(c db.Connection) {
 	panic("自己填写")
-	// orm, err = gorm.Open("`+p.DriverModule+`", c.GetDB("default"))
 
-	// if err != nil {
-	// 	panic("initialize orm failed")
-	// }
+	// MySQL
+	// orm, err = gorm.Open(mysql.New(mysql.Config{
+	// 	Conn: c.GetDB("default"),
+	// }), &gorm.Config{})
 }
 `), os.ModePerm))
 	}
@@ -291,10 +292,22 @@ func Init(c db.Connection) {
 	}
 
 	if defaultLang == "cn" || p.Language == language.CN || p.Language == "cn" {
-		checkError(os.WriteFile("./main_test.go", mainTestCN, 0644))
+
+		buf.Reset()
+		t, err := template.New("go").Parse(mainTestCN)
+		checkError(err)
+		checkError(t.Execute(buf, p))
+
+		checkError(os.WriteFile("./main_test.go", buf.Bytes(), 0644))
 		checkError(os.WriteFile("./README.md", []byte(fmt.Sprintf(readmeCN, p.Port+"/"+p.Prefix)), 0644))
 	} else {
-		checkError(os.WriteFile("./main_test.go", mainTest, 0644))
+
+		buf.Reset()
+		t, err := template.New("go").Parse(mainTest)
+		checkError(err)
+		checkError(t.Execute(buf, p))
+
+		checkError(os.WriteFile("./main_test.go", buf.Bytes(), 0644))
 		checkError(os.WriteFile("./README.md", []byte(fmt.Sprintf(readme, p.Port+"/"+p.Prefix)), 0644))
 	}
 
@@ -350,15 +363,19 @@ var Generators = map[string]table.Generator{
 		checkError(os.WriteFile("./adm.ini", buf.Bytes(), 0644))
 	}
 
-	configByte, err := json.MarshalIndent(cfg, "", "	")
-	configByte = bytes.ReplaceAll(configByte, []byte(`
-	"logger": {
-		"encoder": {},
-		"rotate": {}
-	},`), []byte{})
-	configByte = bytes.ReplaceAll(configByte, []byte(`,
-	"animation": {}`), []byte{})
-	checkError(err)
-	checkError(os.WriteFile("./config.json", configByte, 0644))
+	{
+		buf.Reset()
+		if defaultLang == "cn" || p.Language == language.CN || p.Language == "cn" {
+			t, err := template.New("ymal").Parse(configCn)
+			checkError(err)
+			checkError(t.Execute(buf, cfg))
+		} else {
+			t, err := template.New("ymal").Parse(configEn)
+			checkError(err)
+			checkError(t.Execute(buf, cfg))
+		}
+
+		checkError(os.WriteFile("./config.yaml", buf.Bytes(), 0644))
+	}
 
 }
