@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/plumk97/go-admin/modules/config"
 
@@ -185,6 +186,15 @@ type FilterFormField struct {
 	HelpMsg     template.HTML
 	NoIcon      bool
 	ProcessFn   func(string) string
+}
+
+func (f Field) ToDisplay(value FieldModel) interface{} {
+	if f.TypeName == db.Datetime {
+		if t, err := time.Parse(time.RFC3339, value.Value); err == nil {
+			return t.Format(time.DateTime)
+		}
+	}
+	return f.FieldDisplay.ToDisplay(value)
 }
 
 func (f Field) GetFilterFormFields(params parameter.Parameters, headField string, sql ...*db.SQL) []FormField {
