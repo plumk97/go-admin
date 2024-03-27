@@ -11,7 +11,9 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
+	"github.com/plumk97/go-admin/modules/config"
 	"github.com/plumk97/go-admin/modules/db/dialect"
 	"github.com/plumk97/go-admin/modules/logger"
 )
@@ -446,6 +448,10 @@ func (sql *SQL) All() ([]map[string]interface{}, error) {
 func (sql *SQL) ShowColumns() ([]map[string]interface{}, error) {
 	defer RecycleSQL(sql)
 
+	return sql.showColumns()
+}
+
+func (sql *SQL) showColumns() ([]map[string]interface{}, error) {
 	return sql.diver.QueryWithConnection(sql.conn, sql.dialect.ShowColumns(sql.TableName))
 }
 
@@ -490,7 +496,9 @@ func (sql *SQL) Update(values dialect.H) (int64, error) {
 	defer RecycleSQL(sql)
 
 	sql.Values = values
-
+	if config.GetAutoManagedTime() {
+		sql.autoManagedTimeColumns(false)
+	}
 	sql.dialect.Update(&sql.SQLComponent)
 
 	res, err := sql.diver.ExecWith(sql.tx, sql.conn, sql.Statement, sql.Args...)
@@ -551,6 +559,9 @@ func (sql *SQL) Insert(values dialect.H) (int64, error) {
 	defer RecycleSQL(sql)
 
 	sql.Values = values
+	if config.GetAutoManagedTime() {
+		sql.autoManagedTimeColumns(true)
+	}
 
 	sql.dialect.Insert(&sql.SQLComponent)
 
@@ -619,6 +630,29 @@ func (sql *SQL) clean() {
 	sql.WhereRaws = ""
 	sql.UpdateRaws = make([]dialect.RawUpdate, 0)
 	sql.Statement = ""
+}
+
+func (sql *SQL) autoManagedTimeColumns(isInsert bool) {
+	columns, err := sql.showColumns()
+	if err != nil {
+		logger.Error(err)
+	} else {
+		for _, column := range columns {
+			if isInsert {
+				if column["Field"] == "created_at" {
+					if _, ok := sql.Values["created_at"]; !ok {
+						sql.Values["created_at"] = time.Now()
+					}
+				}
+			}
+
+			if column["Field"] == "updated_at" {
+				if _, ok := sql.Values["updated_at"]; !ok {
+					sql.Values["updated_at"] = time.Now()
+				}
+			}
+		}
+	}
 }
 
 // RecycleSQL clear the SQL and put into the pool.

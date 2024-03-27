@@ -37,6 +37,9 @@ database:
     # 如果设置了DSN，那么以上配置除了Driver都将失效而以配置的DSN为准
     # dsn: ""
 
+# 自动管理数据库时间字段(created_at, updated_at)
+auto_managed_time: {{.AutoManagedTime}}
+
 # 本应用的唯一ID
 app_id: {{.AppID}}
 

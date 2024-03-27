@@ -1061,6 +1061,14 @@ func (s *SystemTable) GetSiteTable(ctx *context.Context) (siteTable Table) {
 			{Text: trueStr, Value: "true"},
 			{Text: falseStr, Value: "false"},
 		})
+
+	formList.AddField("自动管理时间字段", "auto_managed_time", db.Varchar, form.Switch).
+		FieldOptions(types.FieldOptions{
+			{Text: trueStr, Value: "true"},
+			{Text: falseStr, Value: "false"},
+		}).
+		FieldHelpMsg(template.HTML("自动更新created_at、updated_at字段"))
+
 	formList.AddField(lgWithConfigScore("env"), "env", db.Varchar, form.Default).
 		FieldDisplay(func(value types.FieldModel) interface{} {
 			return s.c.Env
@@ -1288,7 +1296,7 @@ func (s *SystemTable) GetSiteTable(ctx *context.Context) (siteTable Table) {
 		}).FieldDisplay(defaultFilterFn("full"))
 
 	formList.HideBackButton().HideContinueEditCheckBox().HideContinueNewCheckBox()
-	formList.SetTabGroups(types.NewTabGroups("id", "debug", "env", "language", "theme", "color_scheme",
+	formList.SetTabGroups(types.NewTabGroups("id", "debug", "auto_managed_time", "env", "language", "theme", "color_scheme",
 		"asset_url", "title", "login_title", "session_life_time", "bootstrap_file_path", "go_mod_file_path", "no_limit_login_ip",
 		"operation_log_off", "allow_del_operation_log", "hide_config_center_entrance", "hide_app_info_entrance", "hide_tool_entrance",
 		"hide_plugin_entrance", "animation_type",

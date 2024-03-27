@@ -258,6 +258,9 @@ type Config struct {
 	// file connection.go.
 	Databases DatabaseList `json:"database,omitempty" yaml:"database,omitempty" ini:"database,omitempty"`
 
+	// Auto managed time when insert/update
+	AutoManagedTime bool `json:"auto_managed_time,omitempty" yaml:"auto_managed_time,omitempty" ini"auto_managed_time,omitempty"`
+
 	// The application unique ID. Once generated, don't modify.
 	AppID string `json:"app_id,omitempty" yaml:"app_id,omitempty" ini:"app_id,omitempty"`
 
@@ -1040,6 +1043,12 @@ func GetDatabases() DatabaseList {
 		}
 	}
 	return list
+}
+
+func GetAutoManagedTime() bool {
+	_global.lock.RLock()
+	defer _global.lock.RUnlock()
+	return _global.AutoManagedTime
 }
 
 func GetDomain() string {
