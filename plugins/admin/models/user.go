@@ -116,8 +116,6 @@ func (t UserModel) Template(str string) string {
 
 func (t UserModel) CheckPermissionByUrlMethod(path, method string, formParams url.Values) bool {
 
-	// path, _ = url.PathUnescape(path)
-
 	if t.IsSuperAdmin() {
 		return true
 	}
@@ -127,7 +125,6 @@ func (t UserModel) CheckPermissionByUrlMethod(path, method string, formParams ur
 	}
 
 	logoutCheck, _ := regexp.Compile(config.Url("/logout") + "(.*?)")
-
 	if logoutCheck.MatchString(path) {
 		return true
 	}
@@ -143,6 +140,12 @@ func (t UserModel) CheckPermissionByUrlMethod(path, method string, formParams ur
 		if len(value) > 0 {
 			params.Add(key, value[0])
 		}
+	}
+
+	// 普通用户默认可以修改自己的资料
+	managerCheck, _ := regexp.Compile(".*/normal_manager(/.*)?")
+	if managerCheck.MatchString(path) {
+		return params.Get("id") == strconv.Itoa(int(t.Id))
 	}
 
 	for _, v := range t.Permissions {
